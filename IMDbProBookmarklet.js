@@ -1,27 +1,34 @@
-The bookmarklet:
-javascript:h=location.href;i=h.indexOf(%27imdb.com%27);p=h.indexOf(%27http://pro.imdb.com%27);t=h.indexOf(%27title%27);c=h.indexOf(%27combined%27);f=h.indexOf(%27fullcredits%27);if(i==-1){window.location=%27http://pro.imdb.com/name/nm2825198/%27}else%20if(p==0){window.location=h.replace(%27http://pro%27,%27http://www%27)}else%20if(p==-1){if((t>1)&&(c>1)){h=h.substring(0,c)}else%20if((t>1)&&(f>1)){h=h.substring(0,f+11)};window.location=h.replace(/http:\/\/[a-z]+/,%27http://pro%27);};
+Updated 2018-05-30 to deal with some new IMDb changes. They got rid of "pro-labs" and are now using "reference" URLs. Will keep an eye out for additional changes.
 
 
 The bookmarklet with line breaks and unencoded:
 
-h=location.href;
-i=h.indexOf('imdb.com');
-p=h.indexOf('http://pro.imdb.com');
-t=h.indexOf('title');
-c=h.indexOf('combined');
-f=h.indexOf('fullcredits');
-if(i==-1){
-  window.location='http://pro.imdb.com/name/nm2825198/'
+h = location.href;
+
+i = h.indexOf('imdb.com');
+p = h.indexOf('https://pro.imdb.com');
+
+t = h.indexOf('title');
+
+c = h.indexOf('combined');
+f = h.indexOf('fullcredits');
+r = h.indexOf('reference');
+badword = Math.max(c,f,r);
+
+if (i==-1) {
+  window.location='https://pro.imdb.com/name/nm2825198/'
 }
-else if(p==0){
-  window.location=h.replace('http://pro','http://www')
+else if (p==0) {
+  window.location=h.replace('https://pro','https://www')
 }
-else if(p==-1){
-  if((t>1)&&(c>1)){
-    h=h.substring(0,c)
+else if (p==-1){
+  if ((t > 1) && (badword > 1)) {
+    h=h.substring(0, badword)
   }
-  else if((t>1)&&(f>1)){
-    h=h.substring(0,f+11)
-  };
-  window.location=h.replace(/http:\/\/[a-z]+/,'http://pro');
+  window.location=h.replace(/https:\/\/[a-z]+/,'https://pro');
 };
+
+
+The bookmarklet after processing with a perl gist from http://daringfireball.net/linked/2014/01/27/javascript-bookmarklet-builder-update :
+
+javascript:h=location.href;i=h.indexOf(%27imdb.com%27);p=h.indexOf(%27https://pro.imdb.com%27);t=h.indexOf(%27title%27);c=h.indexOf(%27combined%27);f=h.indexOf(%27fullcredits%27);r=h.indexOf(%27reference%27);badword=Math.max(c,f,r);if(i==-1)%20{window.location=%27https://pro.imdb.com/name/nm2825198/%27}else%20if(p==0)%20{window.location=h.replace(%27https://pro%27,%27https://www%27)}else%20if(p==-1){if((t>1)&&(badword>1)){h=h.substring(0,badword)}window.location=h.replace(/https:\/\/[a-z]+/,%27https://pro%27);};
