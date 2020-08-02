@@ -1,0 +1,33 @@
+{
+  "name": "imdb-pro-bookmarklet",
+  "version": "2.0.0",
+  "description": "a bookmarklet to whisk you to the Pro version of the IMDb page of your favorite movie / actor / director / writer / grip",
+  "scripts": {
+    "test": "semistandard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://kevinashworth@github.com/kevinashworth/imdb-pro-bookmarklet.git"
+  },
+  "keywords": [
+    "bookmarklets",
+    "imdbpro"
+  ],
+  "author": "Kevin Ashworth",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevinashworth/imdb-pro-bookmarklet/issues"
+  },
+  "homepage": "https://github.com/kevinashworth/imdb-pro-bookmarklet#readme",
+  "devDependencies": {
+    "semistandard": "^14.2.3"
+  },
+  "semistandard": {
+    "globals": [
+      "$"
+    ],
+    "ignore": [
+      "/tests/"
+    ]
+  }
+}
