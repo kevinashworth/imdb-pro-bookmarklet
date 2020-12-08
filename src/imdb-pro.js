@@ -1,8 +1,10 @@
-// This version is called 'v4' under `make-bookmarklet`.
-// Combines better logic, site_preference, more 'bad' words.
+// This version combines better logic, site_preference, more 'bad' words.
+// Use a break point and site_preference to get desktop version.
 // Note: site_preference can only be used on Pro URLs.
 
 (function () {
+  const x = window.innerWidth || document.documentElement.clientWidth;
+  const bp = 400;
   const hr = window.location.href;
   const nh = new URL(hr);
   let u = (nh.origin + nh.pathname);
@@ -11,7 +13,11 @@
   // 1. If not on IMDb at all, go to desired IMDbPro home URL.
   const im = u.indexOf('imdb.com');
   if (im < 0) {
-    window.location = 'https://pro.imdb.com/name/nm2825198/?site_preference=normal';
+    let home = 'https://pro.imdb.com/name/nm2825198/';
+    if (x < bp) {
+      home += '?site_preference=normal';
+    }
+    window.location = home;
     return;
   }
 
@@ -55,6 +61,8 @@
       u = u.substring(0, bad);
     }
   }
-  u = u.concat('?site_preference=normal');
+  if (x < bp) {
+    u = u.concat('?site_preference=normal');
+  }
   window.location = u.replace(/https:\/\/[a-z]+/, 'https://pro');
 })();
