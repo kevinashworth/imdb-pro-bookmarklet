@@ -1,6 +1,6 @@
 {
   "name": "imdb-pro-bookmarklet",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "a bookmarklet to whisk you to the Pro version of the IMDb page of your favorite movie / actor / director / writer / grip",
   "scripts": {
     "test": "semistandard"
